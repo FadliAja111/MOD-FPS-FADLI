@@ -23,7 +23,7 @@ settings().Rendering.QualityLevel = 0
 settings().Rendering.MeshPartDetailLevel = Enum.MeshPartDetailLevel.Level04
 
 Lighting.GlobalShadows = false
-Lighting.FogEnd = 9e2
+Lighting.FogEnd = 9e3
 Lighting.ShadowSoftness = 0
 
 for _,v in pairs(Lighting:GetChildren()) do
@@ -44,7 +44,7 @@ if Terrain then
     Terrain.WaterWaveSize = 0
     Terrain.WaterWaveSpeed = 0
     Terrain.WaterReflectance = 0
-    Terrain.WaterTransparency = 1
+    Terrain.WaterTransparency = 0
 end
 
 MaterialService.Use2022Materials = false
@@ -86,7 +86,7 @@ local function destroyPotato(obj)
         if obj:IsA("MeshPart") then
             obj.Material = Enum.Material.Plastic
             obj.Reflectance = 0
-            obj.Transparency = 1
+            obj.Transparency = 0
             obj.RenderFidelity = Enum.RenderFidelity.Performance
         end
 
@@ -100,6 +100,10 @@ local function destroyPotato(obj)
             obj.LevelOfDetail = 1
         end
         
+            if obj:IsA("MaterialVariant") then
+            obj:Destroy()
+        end
+
         if obj:IsA("FaceInstance") then
             obj.Transparency = 1
             obj.Shiny = 0
